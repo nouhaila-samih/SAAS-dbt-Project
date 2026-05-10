@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw
+    database: saas_db
+    schema: RAW
+    tables:
+      - name: CUSTOMERS
+      - name: EVENTS
+      - name: PAYMENTS
+      - name: SUBSCRIPTIONS
