@@ -1,0 +1,82 @@
+version: 2
+
+models:
+
+  - name: stg_customers
+    description: "Cleaned customer data from the raw layer."
+
+    columns:
+
+      - name: customer_id
+        description: "Unique customer identifier."
+        tests:
+          - unique
+          - not_null
+
+      - name: signup_date
+        tests:
+          - not_null
+
+
+  - name: stg_subscriptions
+    description: "Cleaned subscription records."
+
+    columns:
+
+      - name: subscription_id
+        description: "Unique subscription identifier."
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        tests:
+          - not_null
+
+      - name: start_date
+        tests:
+          - not_null
+
+
+  - name: stg_events
+    description: "Customer activity events."
+
+    columns:
+
+      - name: event_id
+        description: "Unique event identifier."
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        tests:
+          - not_null
+
+      - name: event_date
+        tests:
+          - not_null
+
+
+  - name: stg_payments
+    description: "Customer payment transactions."
+
+    columns:
+
+      - name: payment_id
+        description: "Unique payment identifier."
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        tests:
+          - not_null
+
+      - name: payment_date
+        tests:
+          - not_null
+
+      - name: amount
+        tests:
+          - not_null
