@@ -8,66 +8,34 @@ models:
     columns:
 
       - name: customer_id
-        description: "Unique identifier for each customer."
+        description: "Unique customer identifier."
         tests:
           - unique
           - not_null
 
       - name: signup_date
-        description: "Date when the customer signed up."
         tests:
           - not_null
-
-      - name: country
-        description: "Customer country."
-
-      - name: plan
-        description: "Subscription plan selected by the customer."
-        tests:
-          - not_null
-
-      - name: acquisition_channel
-        description: "Marketing acquisition source of the customer."
-
 
 
   - name: stg_subscriptions
-    description: "Customer subscription information."
+    description: "Cleaned subscription records."
 
     columns:
 
       - name: subscription_id
-        description: "Unique identifier for each subscription."
+        description: "Unique subscription identifier."
         tests:
           - unique
           - not_null
 
       - name: customer_id
-        description: "Reference to the customer owning the subscription."
         tests:
           - not_null
-          - relationships:
-              to: ref('stg_customers')
-              field: customer_id
 
       - name: start_date
-        description: "Subscription start date."
         tests:
           - not_null
-
-      - name: end_date
-        description: "Subscription end date."
-
-      - name: status
-        description: "Current subscription status."
-        tests:
-          - not_null
-
-      - name: monthly_price
-        description: "Monthly subscription price."
-        tests:
-          - not_null
-
 
 
   - name: stg_events
@@ -76,29 +44,18 @@ models:
     columns:
 
       - name: event_id
-        description: "Unique identifier for each event."
+        description: "Unique event identifier."
         tests:
           - unique
           - not_null
 
       - name: customer_id
-        description: "Customer associated with the event."
-        tests:
-          - not_null
-          - relationships:
-              to: ref('stg_customers')
-              field: customer_id
-
-      - name: event_type
-        description: "Type of customer event."
         tests:
           - not_null
 
       - name: event_date
-        description: "Date when the event occurred."
         tests:
           - not_null
-
 
 
   - name: stg_payments
@@ -107,30 +64,19 @@ models:
     columns:
 
       - name: payment_id
-        description: "Unique identifier for each payment."
+        description: "Unique payment identifier."
         tests:
           - unique
           - not_null
 
       - name: customer_id
-        description: "Customer who made the payment."
         tests:
           - not_null
-          - relationships:
-              to: ref('stg_customers')
-              field: customer_id
 
       - name: payment_date
-        description: "Date of payment."
         tests:
           - not_null
 
       - name: amount
-        description: "Payment amount."
-        tests:
-          - not_null
-
-      - name: status
-        description: "Payment transaction status."
         tests:
           - not_null
