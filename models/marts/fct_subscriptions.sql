@@ -1,15 +1,8 @@
-{{config(
-    materialized='view'
-)}}
-
-
 select 
+    s.subscription_id,
     c.customer_id,
-    c.signup_date,
-    c.country,
     c.plan,
     s.monthly_price,
-    s.subscription_id,
     s.start_date,
     s.end_date,
     datediff('month',s.start_date,coalesce(s.end_date,current_date)) as sub_duration_months,

@@ -1,0 +1,90 @@
+
+version: 2
+
+models:
+
+  - name: dim_customers
+    description: "Customer dimension table."
+
+    columns:
+
+      - name: customer_id
+        description: "Unique customer identifier."
+        tests:
+          - unique
+          - not_null
+
+      - name: days_since_signup
+        description: "Number od days since the customer signup"
+
+      - name: customer_type
+        description: "Is the customer's plan paid or free"
+
+
+  - name: fct_subscriptions
+    description: "Subscription fact table."
+
+    columns:
+
+      - name: subscription_id
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+
+      - name: sub_duration_months
+        description: "Subscription duration in months."
+
+      - name: is_active
+        description: "Flag indicating whether the subscription is active."
+
+
+  - name: fct_customer_activity
+    description: "Aggregated customer activity metrics."
+
+    columns:
+
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+
+      - name: total_events
+        description: "Total number of customer events."
+
+      - name: days_since_last_event
+        description: "Days since the customer's latest activity."
+
+      - name: lifecycle_stage
+        description: "Customer engagement classification based on activity recency."
+
+
+  - name: fct_payments
+    description: "Payment fact table."
+
+    columns:
+
+      - name: payment_id
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+
+      - name: amount
+        description: "Payment amount."
+
