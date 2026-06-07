@@ -1,4 +1,4 @@
-SAAS_DB.STAGING.STG_CUSTOMERSCREATE TABLE saas_db.raw.customers (
+CREATE TABLE saas_db.raw.customers (
     customer_id STRING,
     signup_date DATE,
     country STRING,
@@ -19,13 +19,13 @@ CREATE TABLE saas_db.raw.events (
     event_id STRING,
     customer_id STRING,
     event_type STRING,
-    event_date DATESAAS_DB.RAW.CUSTOMERSSAAS_DB.RAW.CUSTOMERS
+    event_date DATE
 );
 
 CREATE TABLE saas_db.raw.payments (
     payment_id STRING,
     customer_id STRING,
-    payment_date DATE,SAAS_DB.RAW.CUSTOMERSSAAS_DB.RAW.CUSTOMERS
+    payment_date DATE,
     amount NUMBER,
     status STRING
 );

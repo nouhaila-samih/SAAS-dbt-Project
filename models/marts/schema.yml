@@ -88,3 +88,11 @@ models:
       - name: amount
         description: "Payment amount."
 
+  - name: dim_date
+    description: "Date dimension table used for all time-based analytics"
+    columns:
+      - name: date
+        description: "Primary key of the date dimension"
+        tests:
+          - unique
+          - not_null
